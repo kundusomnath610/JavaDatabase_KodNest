@@ -11,6 +11,10 @@ public class JdbcApp {
 
     public static void main(String[] args) {
         try (Scanner scn = new Scanner(System.in)) {
+            System.out.print("Enter the Id: ");
+            int id = scn.nextInt();
+            scn.nextLine();
+
             System.out.print("Enter the name: ");
             String name = scn.nextLine();
 
@@ -18,26 +22,27 @@ public class JdbcApp {
             String city = scn.nextLine();
 
             try {
-                Class.forName("com.mysql.cj.jdbc.Driver"); // Load MySQL JDBC driver
+                Class.forName("com.mysql.cj.jdbc.Driver"); // Class Loader in memory..
             } catch (ClassNotFoundException e) {
-                System.out.println("Driver not found: " + e.getMessage());
+                System.out.println("Class Not found " + e.getMessage());
                 return;
             }
 
-            String query = "INSERT INTO emp (name, city) VALUES (?, ?)";
-
+            String Query = "DELETE emp SET name = ?, city = ? where id = ?";
             try (
-                    Connection con = DriverManager.getConnection(url, username, password);
-                    PreparedStatement pstmt = con.prepareStatement(query)
+                Connection con = DriverManager.getConnection(url, username, password);
+                PreparedStatement preparedStatement = con.prepareStatement(Query)
             ) {
-                pstmt.setString(1, name);
-                pstmt.setString(2, city);
+                preparedStatement.setString(1, name);
+                preparedStatement.setString(2, city);
+                preparedStatement.setInt(3, id);
 
-                int rowsAffected = pstmt.executeUpdate();
-                System.out.println("Inserted successfully. Rows affected: " + rowsAffected);
+                int rowAffected = preparedStatement.executeUpdate();
+                System.out.println("Inserted Successfully in Row " + rowAffected);
             } catch (SQLException e) {
-                System.out.println("Database error: " + e.getMessage());
+                System.out.println("Database Error " + e.getMessage());
             }
+
         }
     }
 }
