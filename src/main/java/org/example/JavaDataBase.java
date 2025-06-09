@@ -15,7 +15,7 @@ public class JavaDataBase {
 
         String url = "jdbc:mysql://localhost:3306/my_db";
         String username = "root";
-        String password = "Root_1234";
+        String password = "Root_1234 ";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
