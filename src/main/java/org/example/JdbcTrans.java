@@ -30,7 +30,7 @@ public class JdbcTrans {
             }
 
         } catch (SQLException e) {
-            System.out.println("No problem occure: " + e.getMessage());
+            System.out.println("No problem occur: " + e.getMessage());
         }
     }
 }
