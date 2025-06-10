@@ -12,7 +12,7 @@ public class JdbcApp {
     public static void main(String[] args) {
         try (Scanner scn = new Scanner(System.in)) {
 //            System.out.print("Enter the Id: ");
-//            int id = scn.nextInt();
+//            int id = scn.nextInt();,,
 //            scn.nextLine();
 
             System.out.print("Enter the name: ");
