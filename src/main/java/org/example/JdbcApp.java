@@ -11,9 +11,9 @@ public class JdbcApp {
 
     public static void main(String[] args) {
         try (Scanner scn = new Scanner(System.in)) {
-            System.out.print("Enter the Id: ");
-            int id = scn.nextInt();
-            scn.nextLine();
+//            System.out.print("Enter the Id: ");
+//            int id = scn.nextInt();
+//            scn.nextLine();
 
             System.out.print("Enter the name: ");
             String name = scn.nextLine();
@@ -28,14 +28,13 @@ public class JdbcApp {
                 return;
             }
 
-            String Query = "DELETE emp SET name = ?, city = ? where id = ?";
+            String Query = "INSERT INTO emp (name, city) VALUES (?, ?)";
             try (
                 Connection con = DriverManager.getConnection(url, username, password);
                 PreparedStatement preparedStatement = con.prepareStatement(Query)
             ) {
                 preparedStatement.setString(1, name);
                 preparedStatement.setString(2, city);
-                preparedStatement.setInt(3, id);
 
                 int rowAffected = preparedStatement.executeUpdate();
                 System.out.println("Inserted Successfully in Row " + rowAffected);
